@@ -4,7 +4,7 @@
 
 ## Authors
 
-[Hackers & Designers](https://github.com/hackersanddesigners/cosmo.git) ([Karl](https://moubarak.eu/), [André](https://andrefincato.com/) and [Anja](https://www.anjagroten.info/))
+[Hackers & Designers](https://github.com/hackersanddesigners/cosmo.git) ([André](https://andrefincato.com/), [Anja](https://www.anjagroten.info/), [Karl](https://moubarak.eu/))
 
 ## License
 
