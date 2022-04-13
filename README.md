@@ -4,8 +4,7 @@
 
 ## Authors
 
-Hackers & Designers
-Karl Moubarak, André Fincato and Anja Groten
+[Hackers & Designers](https://github.com/hackersanddesigners/cosmo.git) ([Karl](https://moubarak.eu/), [André](https://andrefincato.com/) and [Anja](https://www.anjagroten.info/))
 
 ## License
 
