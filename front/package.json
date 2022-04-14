@@ -1,0 +1,25 @@
+{
+  "name": "front",
+  "description": "ejs express ssg",
+  "type": "module",
+  "private": true,
+  "version": "0.1.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node .",
+    "serve": "serve dist --listen 3000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "serve": "^13.0.2"
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">=12.x.x <=16.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "CC4R"
+}

@@ -1,0 +1,14 @@
+{
+  "collectionName": "components_content_types_bodies",
+  "info": {
+    "displayName": "text",
+    "icon": "align-left",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "source": {
+      "type": "richtext"
+    }
+  }
+}

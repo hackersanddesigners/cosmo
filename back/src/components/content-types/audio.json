@@ -1,0 +1,25 @@
+{
+  "collectionName": "components_content_types_audio",
+  "info": {
+    "displayName": "audio",
+    "icon": "volume-up",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "link": {
+      "type": "string"
+    },
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "audios"
+      ]
+    },
+    "iframe": {
+      "type": "text"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+
+############################
+# Misc.
+############################
+
+*#
+ssl
+.idea
+nbproject
+public/uploads/*
+!public/uploads/.gitkeep
+
+############################
+# Tests
+############################
+
+testApp
+coverage
+
+############################
+# Strapi
+############################
+
+.env
+license.txt
+exports
+*.cache
+build
+.strapi-updater.json

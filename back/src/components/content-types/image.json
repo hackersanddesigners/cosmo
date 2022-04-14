@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_content_types_images",
+  "info": {
+    "displayName": "image",
+    "icon": "dice-three",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "file": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    }
+  }
+}

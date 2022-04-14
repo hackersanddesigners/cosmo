@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_content_types_galleries",
+  "info": {
+    "displayName": "gallery",
+    "icon": "layer-group",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "files": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "videos"
+      ]
+    }
+  }
+}
