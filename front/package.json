@@ -1,12 +1,12 @@
 {
   "name": "front",
   "description": "ejs express ssg",
-  "type": "module",
   "private": true,
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
     "start": "node .",
+    "dev": "nodemon .",
     "serve": "serve dist --listen 3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +14,7 @@
   "dependencies": {
     "ejs": "^3.1.6",
     "express": "^4.17.3",
+    "nodemon": "^2.0.15",
     "serve": "^13.0.2"
   },
   "devDependencies": {},

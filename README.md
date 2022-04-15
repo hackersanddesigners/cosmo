@@ -1,6 +1,8 @@
 # Cosmogrammatics
 
-
+Strapi is set up as a content management system (port=1337)
+An epress app runs as the front end (port=3000), receives web-hooks from strapi and generates html files accordingly.
+The files are served statically through a web-server such as apache or nginx
 
 ## Authors
 

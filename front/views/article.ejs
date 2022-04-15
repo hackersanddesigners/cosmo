@@ -7,12 +7,14 @@
     <title><%= title %></title>
   </head>
   <body>
-
-    <h1> <%= title %> </h1>
-
+    <h1> 
+      <%= title %>
+    </h1>
     <main>
-      <% for ( const article of articles ) { %> 
-        <%- include('../components/article', { article }) %> 
+      <% for ( const section of body ) { %> 
+        <section>
+          <%= section %> 
+        </section>
       <% } %> 
     </main>
   </body>

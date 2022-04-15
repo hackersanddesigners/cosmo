@@ -1,7 +1,9 @@
-import ejs  from 'ejs'
-import fs   from 'fs'
-import path from 'path'
-import url  from 'url'
+// modules
+
+const 
+  ejs  = require( 'ejs'  ),
+  fs   = require( 'fs'   ),
+  path = require( 'path' )
 
 
 // utils
@@ -11,25 +13,31 @@ const
   mkdir = fs.mkdirSync,
   read  = fs.readFileSync,
   write = fs.writeFileSync,
-  join  = path.join,
-  dir   = path.dirname,
-  file  = url.fileURLToPath
+  join  = path.join
 
 
 // defaults
 
 const 
-  __filename = file( import.meta.url ),
-  __dirname  = dir( __filename ),
-  root       = join( __dirname, '../views' ),
+  views      = join( __dirname, '../views' ),
+  comps      = join( __dirname, '../components' ),
   dist       = join( __dirname, '../dist' ),
-  options    = { root }
+  options    = { 
+    views : [ views, comps ]
+  }
+
+
+// custom loader
+
+ejs.fileLoader = template => {
+  return read( template, 'utf8' ).trim()
+}
 
 
 // get ejs template 
 
 const get_template = template => {
-  return read( `${ root }/${ template }.ejs`, 'utf8' )
+  return read( `${ views }/${ template }.ejs`, 'utf8' )
 }
 
 
@@ -46,12 +54,19 @@ const render = ( template, data ) => {
 
 // save html as file to dist directory
 
-const save = ( filename, data ) => {
-  if ( !exist( dist ) ) mkdir( dist )
-  return write( 
-    `${ dist }/${ filename }.html` , 
-    data 
-  )
+const save = ( slug, data ) => {
+  if ( !exist( dist ) ) {
+    mkdir( dist )
+  }
+  if ( slug == 'index' ) {
+    return write( `${ dist }/${ slug }.html`, data )
+  } else {
+    const dir_path = `${ dist }/${ slug }`
+    if ( !exist( dir_path ) ) {
+      mkdir( dir_path )
+    }
+    return write( `${ dir_path }/index.html` , data )
+  }
 }
 
 
@@ -65,7 +80,7 @@ const generate = ( page, data ) => {
 }
 
 
-export {
+module.exports = {
   get_template,
   render,
   save,
