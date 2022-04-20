@@ -22,6 +22,9 @@ const make_index = articles => {
   })
 }
 
+const make_upload = data => {
+  return generate( 'upload', data )
+}
 
 const make_article = article => {
   return save( 
@@ -37,5 +40,6 @@ const make_article = article => {
 module.exports = {
   init,
   make_index,
+  make_upload,
   make_article
 }

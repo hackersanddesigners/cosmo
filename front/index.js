@@ -74,59 +74,15 @@ const init = async () => {
   
   })
   
-  app.listen(port || 3000, () => {
-    console.log(`Listening on port ${ port || 3000} !`)
-  })
+  // upload page
+  // <2022-04-20> for now it seems sensible, given the setup
+  // to render this HTML dynamically through express
+  // as everything in /dist is based on data coming from strapi?
+  // alternatively: we could build this page as part of the build process...
 
-// upload page
-// <2022-04-20> for now it seems sensible, given the setup
-// to render this HTML dynamically through express
-// as everything in /dist is based on data coming from strapi?
-// alternatively: we could build this page as part of the build process...
-
-app.get('/upload', (req, res) => {
-  const data = {
-    title: 'Upload',
-    form: {
-      title: {
-        type: 'text',
-        name: 'title',
-        label: 'Title',
-        value: '',
-        placeholder: 'Type the title of your contribution'
-      },
-      file: {
-        type: 'file',
-        name: 'file',
-        label: 'Upload file',
-        value: '',
-        accept: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-      },
-      send: {
-        type: 'submit',
-        value: 'Upload'
-      }
-    }
-  }
-
-  res.render('upload', data)
-})
-
-app.post('/upload',
-         body('title').trim().isLength({min: 1}).escape().withMessage('Contribution title cannot be empty'),
-
-         fileUpload.single('file')
-         , (req, res) => {
-
-  const errors = validationResult(req)
-  console.log('errors =>', errors)
-
-  if (!errors.isEmpty()) {
-    // TODO display upload page with errors
-    // next to each field
-
+  app.get('/upload', (req, res) => {
     const data = {
-      title: 'Uploaded!',
+      title: 'Upload',
       form: {
         title: {
           type: 'text',
@@ -149,21 +105,63 @@ app.post('/upload',
       }
     }
 
-    res.render('upload', data)
+    engine.make_upload( data )
+  })
 
-  } else {
-    // TODO
-    // - write uploaded file to disk
-    // - parse file appropriately and
-    //   send json object to strapi
+    app.post('/upload',
+      body('title').trim().isLength({min: 1}).escape().withMessage('Contribution title cannot be empty'),
+      fileUpload.single('file'), 
+      (req, res) => {
 
-    res.render('upload', {title: 'Uploaded!'})
-  }
+        const errors = validationResult(req)
+        console.log('errors =>', errors)
 
-})
+        if (!errors.isEmpty()) {
+          // TODO display upload page with errors
+          // next to each field
+
+          const data = {
+            title: 'Uploaded!',
+            form: {
+              title: {
+                type: 'text',
+                name: 'title',
+                label: 'Title',
+                value: '',
+                placeholder: 'Type the title of your contribution'
+              },
+              file: {
+                type: 'file',
+                name: 'file',
+                label: 'Upload file',
+                value: '',
+                accept: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+              },
+              send: {
+                type: 'submit',
+                value: 'Upload'
+              }
+            }
+          }
+
+      res.render('upload', data)
+
+    } else {
+      // TODO
+      // - write uploaded file to disk
+      // - parse file appropriately and
+      //   send json object to strapi
+
+      res.render('upload', {title: 'Uploaded!'})
+    }
+
+  })
 
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+  app.listen( port || 3000, () => {
+    console.log(`Listening on port ${ port || 3000 } !`)
+  })
+}
 
 init()
 
