@@ -1,0 +1,10 @@
+#meta table {
+  border-collapse: collapse;
+}
+
+
+#meta table td {
+  font-family: monospace;
+  border: 1px solid;
+  padding: 0.1rem 0.3rem;
+}

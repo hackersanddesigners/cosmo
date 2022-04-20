@@ -1,0 +1,24 @@
+<% const { 
+  
+  slug, 
+  title, 
+  version 
+
+} = article %>
+
+<article aria-labelledby="<%= slug %>">
+
+  <h3 id="<%= slug %>">
+    <a
+      title="<%= title %>"
+      href="<%= slug %>"
+    >
+      <%= title %>
+    </a>
+  </h3>
+
+  <p>
+    Version <%= version %> 
+  </p>
+  
+</article>
