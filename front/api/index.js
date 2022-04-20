@@ -26,13 +26,28 @@ const
         axios
         .get( `articles`, { params: { 
           sort: 'publishedAt:desc',
-          // pagination: {
-          //   page: page,
-          //   pageSize: 20,
-          // },
           fields: '*',
-          // populate: '*',
+          populate: '*',
         } } )
+        .then( result => {
+          resolve( result.data.data )
+        } )
+        .catch( error => {
+          console.error( `API:`, error ) 
+          reject( error )
+        } )
+      } ) 
+    }
+
+  },
+
+  about = {
+ 
+    get() {
+      console.info( `API: Fetching about.` )
+      return new Promise( ( resolve, reject ) => {
+        axios
+        .get( `about` )
         .then( result => {
           resolve( result.data.data )
         } )
@@ -49,6 +64,7 @@ const
 module.exports = {
   
   init,
-  articles
+  articles,
+  about
 
 }

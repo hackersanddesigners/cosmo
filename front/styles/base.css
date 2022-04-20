@@ -4,3 +4,8 @@ body {
 article h3 {
   margin-bottom: 0;
 }
+
+main section {
+  max-width  : min(70%, 40rem);
+  /* margin     : 5rem auto; */
+}

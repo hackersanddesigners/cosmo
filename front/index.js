@@ -1,22 +1,21 @@
-const config  = require( './config' )
 const api     = require( './api' )
 const engine  = require( './engine' )
 const express = require( 'express' )
-const { body,validationResult } = require('express-validator')
-const fileUpload = require('./components/file-upload')
+const { 
+  body,
+  validationResult, 
+  header 
+} = require('express-validator')
+const fileUpload = require('./views/comps/file-upload')
+const reload = require('reload')
 
-
-const {
-  render,
-  save,
-  generate
-} = require( './engine' )
 
 const {
   title,
+  routes,
   api_url,
   port
-} = config
+} = require( './config' )
 
 
 
@@ -24,16 +23,26 @@ const {
 const init = async () => {
 
   
-  engine.init( title )
   api.init( api_url )
+  engine.init({ title, routes })
 
   
   // on init, make index
   
   try {
+
     const articles = await api.articles.get_all()
-    console.log(articles)
-    engine.make_index( articles )
+    engine.make.index( articles )
+
+    for ( const article of articles ) {
+      engine.make.article( article )
+    }
+
+    const form = { title: 'Upload' }
+    engine.make.upload( form )
+
+    const about = await api.about.get()
+    engine.make.about( about )
 
   } catch ( error ) {
     throw error
@@ -63,7 +72,11 @@ const init = async () => {
     switch( model ) {
   
       case 'article':
-        engine.make_article( data )
+        engine.make.article( data )
+        break
+
+      case 'about':
+        engine.make.about( data )
         break
   
       default:
@@ -80,71 +93,24 @@ const init = async () => {
   // as everything in /dist is based on data coming from strapi?
   // alternatively: we could build this page as part of the build process...
 
-  app.get('/upload', (req, res) => {
-    const data = {
-      title: 'Upload',
-      form: {
-        title: {
-          type: 'text',
-          name: 'title',
-          label: 'Title',
-          value: '',
-          placeholder: 'Type the title of your contribution'
-        },
-        file: {
-          type: 'file',
-          name: 'file',
-          label: 'Upload file',
-          value: '',
-          accept: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        },
-        send: {
-          type: 'submit',
-          value: 'Upload'
-        }
+  app.post('/upload',
+    body('title').trim().isLength({min: 1}).escape().withMessage('Contribution title cannot be empty'),
+    fileUpload.single('file'), 
+    (req, res) => {
+
+      const errors = validationResult(req)
+      console.log('errors =>', errors)
+
+      if (!errors.isEmpty()) {
+
+      // TODO display upload page with errors
+      // next to each field
+
+      const form = {
+        title: 'Uploaded!',
       }
-    }
 
-    engine.make_upload( data )
-  })
-
-    app.post('/upload',
-      body('title').trim().isLength({min: 1}).escape().withMessage('Contribution title cannot be empty'),
-      fileUpload.single('file'), 
-      (req, res) => {
-
-        const errors = validationResult(req)
-        console.log('errors =>', errors)
-
-        if (!errors.isEmpty()) {
-          // TODO display upload page with errors
-          // next to each field
-
-          const data = {
-            title: 'Uploaded!',
-            form: {
-              title: {
-                type: 'text',
-                name: 'title',
-                label: 'Title',
-                value: '',
-                placeholder: 'Type the title of your contribution'
-              },
-              file: {
-                type: 'file',
-                name: 'file',
-                label: 'Upload file',
-                value: '',
-                accept: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-              },
-              send: {
-                type: 'submit',
-                value: 'Upload'
-              }
-            }
-          }
-
-      res.render('upload', data)
+      res.render( 'upload', form )
 
     } else {
       // TODO
@@ -152,15 +118,21 @@ const init = async () => {
       // - parse file appropriately and
       //   send json object to strapi
 
-      res.render('upload', {title: 'Uploaded!'})
+      const form = {
+        title: 'Uploaded!',
+      }
+
+      res.render( 'upload', form )
     }
 
   })
 
-
   app.listen( port || 3000, () => {
     console.log(`Listening on port ${ port || 3000 } !`)
   })
+  if ( process.env.NODE_ENV == 'development' ) {
+    reload(app)
+  }
 }
 
 init()

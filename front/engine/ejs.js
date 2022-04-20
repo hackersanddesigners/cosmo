@@ -1,92 +1,84 @@
-// modules
-
 const 
-  ejs  = require( 'ejs' ),
-  path = require( 'path' ),
-  fs   = require( 'fs' ),
-  fse  = require('fs-extra')
+  
+  // fs and path wrappers
+
+  {
+    exist,
+    mkdir,
+    read,
+    write,
+    join
+  } = require( './fs' ),
 
 
-// utils
+  // Official EJS library
 
-const 
-  exist = fs.existsSync,
-  mkdir = fs.mkdirSync,
-  cpdir = fse.copySync,
-  read  = fs.readFileSync,
-  write = fs.writeFileSync,
-  join  = path.join
+  ejs = require( 'ejs' ),
 
+  
+  // Directories with EJS templates in them
 
-// defaults
-
-const 
-  views      = join( __dirname, '../views' ),
-  comps      = join( __dirname, '../components' ),
-  styles     = join( __dirname, '../styles' ),
-  dist       = join( __dirname, '../dist' ),
-  options    = { 
-    views : [ views, comps ]
-  }
+  views = join( __dirname, '../views' ),
+  pages = join( __dirname, '../views/pages' ),
+  comps = join( __dirname, '../views/comps' ),
 
 
-// custom loader
+  // Dist directory 
+
+  dist = join( __dirname, '../dist' )
+
+
+// Custom loader
 
 ejs.fileLoader = template => {
   return read( template, 'utf8' ).trim()
 }
 
 
-// get ejs template 
+// Get ejs template 
 
 const get_template = template => {
-  return read( `${ views }/${ template }.ejs`, 'utf8' )
+  template = template ?? 'index'
+  return read( `${ pages }/${ template }.ejs`, 'utf8' )
 }
 
 
-// render html from ejs template and data
+// Render html and json from ejs template and data
 
 const render = ( template, data ) => {
-  return ejs.render(
-    get_template( template ),
-    data,
-    options,
-  )
+  return {
+    html: ejs.render(
+      get_template( template ),
+      data,
+      { views : [ views, pages, comps ] },
+    ),
+    json: JSON.stringify( 
+      data, 
+      null, 
+      2 
+    )
+  }
 }
 
 
-// save html as file to dist directory
+// Save html and json files to the appropriate dirs
 
-const save = ( slug, data ) => {
-  if ( !exist( dist ) ) {
-    mkdir( dist )
-  }
-  cpdir( styles, `${ dist }/styles` , { overwrite: true } )
-  if ( slug == 'index' ) {
-    return write( `${ dist }/${ slug }.html`, data )
-  } else {
-    const dir_path = `${ dist }/${ slug }`
-    if ( !exist( dir_path ) ) {
-      mkdir( dir_path )
+const save = ( slug, { json, html } ) => {
+  slug = slug ?? ''
+  let path = dist
+  const dirs = slug.split('/')
+  for ( const dir of dirs ) {
+    path += `/${ dir }`
+    if ( !exist( path ) ) {
+      mkdir( path )
     }
-    return write( `${ dir_path }/index.html` , data )
   }
+  write( `${ path }/index.json`, json )
+  write( `${ path }/index.html`, html )
 }
 
-
-// render html and save to dist
-
-const generate = ( page, data ) => {
-  const 
-    html = render( page, data ),
-    file = save( page, html )
-  return file
-}
-
-
-module.exports = {
-  get_template,
+module.exports = { 
+  dist,
   render,
-  save,
-  generate
+  save
 }

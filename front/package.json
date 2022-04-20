@@ -5,8 +5,8 @@
   "version": "0.1.0",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon -e js,css,ejs --ignore dist/ .",
-    "start": "node .",
+    "dev": "NODE_ENV=development nodemon -e js,css,ejs --ignore dist/ .",
+    "start": "NODE_ENV=production node .",
     "serve": "serve dist --listen 3000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -15,11 +15,12 @@
     "axios": "^0.26.1",
     "ejs": "^3.1.6",
     "express": "^4.17.3",
-    "fs-extra": "^10.1.0",
-    "qs": "^6.10.3",
     "express-validator": "^6.14.0",
+    "fs-extra": "^10.1.0",
+    "marked": "^4.0.14",
     "multer": "^1.4.4",
     "nodemon": "^2.0.15",
+    "qs": "^6.10.3",
     "sanitize-filename": "^1.6.3",
     "serve": "^13.0.2",
     "slugify": "^1.6.5"
@@ -28,5 +29,8 @@
     "node": ">=12.x.x <=16.x.x",
     "npm": ">=6.0.0"
   },
-  "license": "CC4R"
+  "license": "CC4R",
+  "devDependencies": {
+    "reload": "^3.2.0"
+  }
 }
