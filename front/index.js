@@ -1,89 +1,87 @@
 const config  = require( './config' )
+const api     = require( './api' )
+const engine  = require( './engine' )
 const express = require( 'express' )
 
 const {
   render,
   save,
   generate
-} = require( './engine/index.js' )
+} = require( './engine' )
 
 const {
   title,
-  api_url
+  api_url,
+  port
 } = config
 
 
 
 
+const init = async () => {
 
-const make_index = articles => {
-  return generate( 'index', {
-    title,
-    articles
-  })
-}
-
-
-const make_article = article => {
-  return save( 
-    article.slug, 
-    render( 'article', article )
-  )
-}
-
-
-
-// on init, make index
-
-// const articles = fectch( api_url / articles )
-const articles = [
-  { slug: 'article-1' },
-  { slug: 'article-2' },
-  { slug: 'article-3' },
-  { slug: 'article-4' },
-  { slug: 'article-5' },
-]
-
-make_index( articles )
-
-
-
-
-// listen for strapi hooks
-
-const app = express()
-
-app.use(express.json())
-
-app.post('/', (req, res) => {
-
-  const 
-    model   = req.body.model,
-    type    = req.body.event.split('.').pop(),
-    data    = req.body.entry
-
-  console.log(type, model)
-
-  switch( model ) {
-
-    case 'article':
-      make_article( data )
-      break
-
-    default:
-
-  }
-
-  res.send('OK')
   
-})
+  engine.init( title )
+  api.init( api_url )
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+  
+  // on init, make index
+  
+  try {
+    const articles = await api.articles.get_all()
+    console.log(articles)
+    engine.make_index( articles )
 
+  } catch ( error ) {
+    throw error
+  }
+  
+  
+  
+  
+  
+  // listen for strapi hooks
+  
+  const app = express()
+  
+  app
+  .use( express.json() )
+  .use( express.static( 'dist' ) )
+  
+  app.post('/', (req, res) => {
+  
+    const 
+      model   = req.body.model,
+      type    = req.body.event.split('.').pop(),
+      data    = req.body.entry
+  
+    console.log(type, model)
+  
+    switch( model ) {
+  
+      case 'article':
+        engine.make_article( data )
+        break
+  
+      default:
+  
+    }
+  
+    res.send('OK')
+  
+  })
+  
+  app.listen(port || 3000, () => {
+    console.log(`Listening on port ${ port || 3000} !`)
+  })
+
+}  
+
+init()
 
 // exports to be used somewhere else?
 
 module.exports = {
-  make_index,
-  make_article
+  api,
+  engine
 }

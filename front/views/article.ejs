@@ -1,21 +1,64 @@
+<% const { 
+
+  slug,
+  title, 
+  version,
+  createdAt,
+  publishedAt,
+  updatedAt,
+  body,
+
+} = article %>
+
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <%- include( 'head' ) %>
     <title><%= title %></title>
   </head>
+
   <body>
+    <script>
+      const article = <%- JSON.stringify( article, null, 2 ) %>
+      console.log(article)
+    </script>
+
+    <%- include( 'header', header ) %>
+
     <h1> 
       <%= title %>
     </h1>
+
+    <section id="meta">
+      <p> 
+        Created:
+        <time datetime="<%= createdAt %>">
+          <%= createdAt %>
+        </time>
+      </p>
+      <p> 
+        Published:
+        <time datetime="<%= publishedAt %>">
+          <%= publishedAt %>
+        </time>
+      </p>
+      <p> 
+        Updated:
+        <time datetime="<%= updatedAt %>">
+          <%= updatedAt %>
+        </time>
+      </p>
+    </section>
+
     <main>
       <% for ( const section of body ) { %> 
         <section>
-          <%= section %> 
+          <pre><%= JSON.stringify( section, null, 2 ) %></pre>
         </section>
       <% } %> 
     </main>
+
   </body>
 </html>
+    
