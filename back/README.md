@@ -1,3 +1,25 @@
+# environment setup
+
+- npm i
+- npm run dev
+
+strapi will ask you to set some secrets. do:
+
+- cp .env.example .env
+- add to .env:
+  - APP_KEYS=['<secret>']
+  - ADMIN_JWT_SECRET=<secret>
+  - API_TOKEN_SALT=<secrect>
+
+generate a secret by:
+
+- accessing the node repl: in a terminal, type `node`
+- do `crypto.randomBytes(16).toString('base64')` for each of the tree secret
+
+a key `JWT_SECRET` should be added by strapi itself to `.env`. if not, add it yourself by generating a new secret as described above.
+
+after this, running `npm run dev` should work fine and a browser window should open and show you the strapi login page.
+
 # 🚀 Getting started with Strapi
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/developer-docs/latest/developer-resources/cli/CLI.html) (CLI) which lets you scaffold and manage your project in seconds.
