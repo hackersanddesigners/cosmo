@@ -26,18 +26,19 @@ main article.block {
   /* transition: box-shadow var(--very-fast) linear; */
   transition: filter var(--very-fast) linear;
   overflow: hidden;
+  border-right: var(--thin);
 }
 
 main article.block::before {
   content: '';
   position: absolute;
-  box-sizing: border-box;
   top: 0;
-  left: 0;
+  left: 0px;
   height: 100%;
   width: 100%;
   background: var(--back);
   border: var(--thin);
+  border-right: none;
   clip-path: polygon(
     0 0,
     0 0,
