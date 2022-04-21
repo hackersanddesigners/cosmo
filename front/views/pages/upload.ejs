@@ -4,6 +4,7 @@
   <head>
     <%- include( 'head' ) %>
     <title><%= form.title %></title>
+    <link rel="stylesheet" type = "text/css" href="/styles/form.css">
   </head>
 
   <body>
@@ -20,24 +21,29 @@
           action="/upload" 
           method="post" 
           enctype="multipart/form-data"
+          class="form"
         >
 
-          <label for="title"> Title </label>
-          <input 
-            id="title" 
-            name="title" 
-            placeholder="Type the title of your contribution" 
-            type="text"
-          />
+          <div class="form-block">
+            <label for="title"> Title </label>
+            <input 
+              id="title" 
+              name="title" 
+              placeholder="Type the title of your contribution" 
+              type="text"
+            />
+          </div>
 
-          <label for="file">Upload file</label>
-          <input 
-            id="file" 
-            name="file" 
-            accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document" 
-            placeholder="" 
-            type="file"
-          />
+          <div class="form-block">
+            <label for="file">Upload file</label>
+            <input 
+              id="file" 
+              name="file" 
+              accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document" 
+              placeholder="" 
+              type="file"
+            />
+          </div>
 
           <input 
             type="submit" 

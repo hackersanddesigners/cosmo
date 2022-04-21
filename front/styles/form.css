@@ -1,0 +1,23 @@
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-block {
+  width: 100%;
+  padding-bottom:  1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.form-block label {
+  margin: 0 2rem 0 0;
+  padding: 0;
+  min-width: 15%;
+}
+
+.form-block input {
+  width: 100%;
+}

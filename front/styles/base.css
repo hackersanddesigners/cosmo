@@ -138,3 +138,9 @@ main section figure figcaption {
   min-width  : calc( 10 * var(--unit));
   border : var(--very-thin);
 }
+
+/* forms */
+
+input[type=submit] {
+    cursor: pointer;
+}
