@@ -13,7 +13,7 @@ table tr {
 }
 table td {
   font-family: monospace;
-  border: 1px solid;
+  border: var(--thin);
   padding: 0.1rem 0.3rem;
 }
 

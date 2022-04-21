@@ -62,8 +62,8 @@ module.exports = {
 
 
   init : meta => {
-    header = meta
-    footer = meta
+    header = meta.header
+    footer = meta.footer
   },
 
   index : articles => {
