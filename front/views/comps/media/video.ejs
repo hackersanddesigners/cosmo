@@ -1,0 +1,29 @@
+<% const {
+  source,
+  iframe,
+  name
+} = section %>
+
+
+<% if ( source ) { %>
+  <figure>
+    
+    <% if ( iframe ) { %>
+      <%- source %>
+
+    <% } else { %>
+      <video
+        controls
+        preload="metadata"
+      >
+        <source src="<%= source %>" />
+        Your browser does not support the audio tag.
+      </video>
+      <figcaption>
+        <%= name %>
+      </figcaption>
+      
+      <% } %>
+    
+  </figure>
+<% } %>

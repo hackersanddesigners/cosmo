@@ -1,6 +1,7 @@
 module.exports = {
 
   api_url: 'http://localhost:1337/api',
+  api_upload_url: 'http://localhost:1337',
 
   port: 3000,
 

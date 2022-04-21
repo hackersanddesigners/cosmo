@@ -60,7 +60,7 @@ const init = async () => {
   .use( express.json() )
   .use( express.static( 'dist' ) )
   
-  app.post('/', (req, res) => {
+  app.post('/', async (req, res) => {
   
     const 
       model   = req.body.model,
@@ -73,6 +73,8 @@ const init = async () => {
   
       case 'article':
         engine.make.article( data )
+        const articles = await api.articles.get_all()
+        engine.make.index( articles )
         break
 
       case 'about':

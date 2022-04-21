@@ -1,9 +1,8 @@
 {
-  "collectionName": "components_content_types_bodies",
+  "collectionName": "components_content_types_texts",
   "info": {
     "displayName": "text",
-    "icon": "align-left",
-    "description": ""
+    "icon": "align-left"
   },
   "options": {},
   "attributes": {

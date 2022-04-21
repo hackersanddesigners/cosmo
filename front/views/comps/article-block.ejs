@@ -2,11 +2,15 @@
   
   slug, 
   title, 
+  author,
   version 
 
 } = article %>
 
-<article aria-labelledby="<%= slug %>">
+<article 
+  class="block"
+  aria-labelledby="<%= slug %>"
+>
 
   <h3 id="<%= slug %>">
     <a
@@ -17,8 +21,7 @@
     </a>
   </h3>
 
-  <p>
-    Version <%= version %> 
-  </p>
+  <p><em><%= author %></em></p>
+  <p>Version <%= version %></p>
   
 </article>

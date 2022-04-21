@@ -1,0 +1,10 @@
+<% const { type } = section %>  
+<section>
+
+  <% if ( type == 'gallery' ) { %>
+    <pre><%= JSON.stringify( section, null, 2 ) %></pre>
+  <% } else { %>
+      <%- include( `media/${ type }`, section ) -%>
+  <% } %>
+
+</section>

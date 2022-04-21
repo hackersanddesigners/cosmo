@@ -1,11 +1,45 @@
-body {
+*,
+*::before,
+*::after {
+  box-sizing       : border-box;
 }
 
-article h3 {
-  margin-bottom: 0;
+
+body {
 }
 
 main section {
   max-width  : min(70%, 40rem);
-  /* margin     : 5rem auto; */
+}
+
+main section figure {
+  /* width: 100%; */
+}
+main section figure img {
+  max-width: 100%;
+}
+
+main section figure audio,
+main section figure video {
+  width: 100%;
+}
+
+main section figure figcaption {
+  font-style: italic;
+  text-align: center;
+}
+
+main section.articles {
+  display: flex;
+}
+
+main article.block {
+  min-width  : min(30%, 10rem);
+  border: 1px solid;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+}
+main article.block h3,
+main article.block p {
+  margin: 0;
 }

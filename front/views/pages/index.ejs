@@ -13,10 +13,14 @@
     <main>
 
       <h1> <%= title %> </h1>
-      
-      <% for ( const article of articles ) { %> 
-        <%- include( 'article-block', { article }) %> 
-      <% } %> 
+
+      <section 
+        class="articles"
+      >
+        <% for ( const article of articles ) { %> 
+          <%- include( 'article-block', { article }) %> 
+        <% } %> 
+      </section>
     
     </main>
 

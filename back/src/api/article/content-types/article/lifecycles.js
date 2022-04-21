@@ -1,6 +1,9 @@
 const
 
-  before_create_or_update = event => {
+  before_update = event => {
+    if (event.params.data.version) {
+      event.params.data.version ++
+    }  
   },
 
   after_create_or_update = event => {
@@ -14,8 +17,8 @@ const
 
 module.exports = {
 
-  beforeCreate: before_create_or_update,
-  beforeUpdate: before_create_or_update,
+  // beforeCreate: before_create_or_update,
+  beforeUpdate: before_update,
 
   afterCreate: after_create_or_update,
   afterUpdate: after_create_or_update,

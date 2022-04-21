@@ -5,6 +5,7 @@ const
   {
     lsdir,
     lstat,
+    exist,
   } = require( './fs' ),
 
 
@@ -17,12 +18,9 @@ const
   } = require( './ejs' ),
 
 
-  // Markdown rendering
+  // sanitize api responses
 
-  {
-    md,
-    mdi 
-  } = require( './md' )
+  sanitize = require( './sanitize' )
 
 
 let
@@ -43,6 +41,20 @@ const generate = ({ route, template, data }) => {
     page  = render( template, data ),
     files = save( route, page )
   return files
+}
+
+
+// Get children directories of a directory
+
+get_children = parent => {
+  return (
+    exist( `${ dist }/${ parent }` ) &&
+    lsdir( `${ dist }/${ parent }` )
+    .filter( dir => (
+      lstat( `${ dist }/${ parent }/${ dir }` )
+      .isDirectory()
+    ) ) || null
+  ) 
 }
 
 
@@ -71,7 +83,7 @@ module.exports = {
 
 
   about : about => {
-    about.text = md( about.text )
+    about = sanitize.about( about )
     return generate({
       route : 'about',
       data  : { about }  
@@ -80,18 +92,18 @@ module.exports = {
 
 
   article : article => {
+    article = sanitize.article( article )
     const 
       updated  = article.updatedAt.replace(/[^a-z0-9]/gi, '-'),
       parent   = article.slug,
-      child    = `${ parent }/${ updated }`
-    console.log(child)
+      child    = `${ parent }/${ updated }`,
+      siblings = get_children( parent )
     generate({
       route : child,
       template : 'article',
       data  : { article }  
     })
-    article.siblings = lsdir( `${ dist }/${ parent }` )
-      .filter(dir => lstat( `${dist}/${parent}/${dir}` ).isDirectory())
+    article.siblings = siblings
     return generate({
       route : parent,
       template : 'article',

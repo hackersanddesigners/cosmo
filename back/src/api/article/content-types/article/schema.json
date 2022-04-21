@@ -25,10 +25,10 @@
       "type": "dynamiczone",
       "components": [
         "content-types.audio",
-        "content-types.body",
         "content-types.gallery",
         "content-types.image",
-        "content-types.video"
+        "content-types.video",
+        "content-types.text"
       ],
       "required": false
     },

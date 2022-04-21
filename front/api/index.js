@@ -27,7 +27,11 @@ const
         .get( `articles`, { params: { 
           sort: 'publishedAt:desc',
           fields: '*',
-          populate: '*',
+          populate: {
+            body: {
+              populate: '*',
+            },
+          }
         } } )
         .then( result => {
           resolve( result.data.data )
