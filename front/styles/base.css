@@ -28,7 +28,8 @@
 
   --solid        : 1px solid;
   --dash         : 1px dashed;
-  --thin         : .5px solid;
+  --thin         : .25px solid;
+  --very-thin    : .25px solid var(--blue);
   --focus        : 2px solid var(--accent);
 
 
@@ -119,11 +120,12 @@ main section figure figcaption {
   top: 0;
   left: 0;
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  border-collapse: collapse;
 }
-#grid div {
+#grid td {
   height : calc( 10 * var(--unit));
-  width  : calc( 10 * var(--unit));
-  border : var(--thin);
+  min-width  : calc( 10 * var(--unit));
+  border : var(--very-thin);
 }
