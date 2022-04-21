@@ -74,7 +74,9 @@ body {
 
   padding          : 0;
   margin           : 0;
-  scroll-behavior: smooth;
+  height           : 100%;
+  width            : 100%;
+  scroll-behavior  : smooth;
 
 }
 
@@ -89,6 +91,10 @@ h1 {
   margin: 0;
 }
 
+main {
+  min-height: 80%;
+}
+
 main section {
   max-width  : min(70%, 40rem);
 }
@@ -99,6 +105,10 @@ main section figure {
   padding-inline: var(--unit);
   padding-block: var(--unit);
   margin-block: var(--unit);
+}
+main section.text:focus-within,
+main section figure:focus-within {
+  outline: var(--focus);
 }
 
 main section.text {

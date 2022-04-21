@@ -13,6 +13,7 @@ const reload = require('reload')
 const {
   title,
   routes,
+  footer,
   api_url,
   port
 } = require( './config' )
@@ -24,7 +25,10 @@ const init = async () => {
 
   
   api.init( api_url )
-  engine.init({ title, routes })
+  engine.init({ 
+    header: { title, routes },
+    footer 
+  })
 
   
   // on init, make index

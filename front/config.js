@@ -22,6 +22,10 @@ module.exports = {
     }
   ],
 
+  footer: {
+    message: 'Footer message.'
+  },
+
   md: {
     silent      : true,
     breaks      : true,
