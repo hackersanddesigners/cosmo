@@ -14,6 +14,7 @@ main article.block {
   /* background-color: var(--back); */
   min-height: calc(25 * var(--unit ));
   margin: var(--margin);
+  margin-left: calc(var(--margin) - 0.5px);
   /* flex-basis: min( calc(33.33% - 2 * var(--margin)), calc(20rem - 2 * var(--margin))); */
   flex-basis: calc(20 * var(--unit ));
   /* border: var(--thin); */
@@ -33,7 +34,7 @@ main article.block::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0px;
+  left: 0;
   height: 100%;
   width: 100%;
   background: var(--back);
@@ -49,9 +50,10 @@ main article.block::before {
     2.5vw 100%,
     0 calc(100% - 2.5vw),
     0 0
-  ) 
+  );
 }
 main article.block::after {
+  pointer-events: none;
   content: '';
   position: absolute;
   box-sizing: border-box;
@@ -66,6 +68,9 @@ main article.block::after {
 main article.block p {
   margin: 0;
 }
+main article.block a {
+  padding: 0.2rem 0.3rem;
+}
 main article.block p:nth-last-of-type(2) {
   margin-left: calc(var(--unit) * 0.5);
 }
@@ -75,7 +80,7 @@ main article.block p:last-of-type {
 main article.block:hover,
 main article.block:focus,
 main article.block:focus-within {
-  filter: drop-shadow(0 0 1rem hsla(60, 100%, 50%, 0.457));
+  filter: drop-shadow(0 0 0.35rem hsla(60, 100%, 50%, 0.457));
   /* box-shadow: 0 0 var(--shadow-size) 0rem hsla(60, 100%, 50%, 0.457); */
   z-index: 1;
 }

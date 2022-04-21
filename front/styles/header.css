@@ -9,10 +9,15 @@ header nav ul li {
   margin-right: 0.5rem;
 }
 
+
+header nav ul li a {
+  padding: 0.2rem 0.3rem;
+}
+
 header a.skip-to-main {
   position: absolute;
   left: var(--unit);
-  padding: 0 0.3rem;
+  padding: 0.2rem 0.3rem;
   background-color: var(--white);
   transform: translateY(-200%);
   transition: transform var(--fast) linear;

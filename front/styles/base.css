@@ -30,7 +30,7 @@
   --dash         : 1px dashed;
   --thin         : .25px solid;
   --very-thin    : .25px solid var(--blue);
-  --focus        : 2px solid var(--accent);
+  --focus        : 1px solid var(--accent);
 
 
   /* Shadow parameters for box-shadows and drop-shadows */
@@ -58,6 +58,15 @@
 
 *:focus {
   outline          : var(--focus);
+}
+
+a,
+a:active,
+a:visited {
+  color            : var(--blue);
+}
+a:focus {
+  text-decoration: none;
 }
 
 html,
