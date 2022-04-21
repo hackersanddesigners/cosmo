@@ -8,3 +8,16 @@ header nav ul {
 header nav ul li {
   margin-right: 0.5rem;
 }
+
+header a.skip-to-main {
+  position: absolute;
+  left: var(--unit);
+  padding: 0 0.3rem;
+  background-color: var(--white);
+  transform: translateY(-200%);
+  transition: transform var(--fast) linear;
+  z-index: 1;
+}
+header a.skip-to-main:focus {
+  transform: translateY(0);
+}

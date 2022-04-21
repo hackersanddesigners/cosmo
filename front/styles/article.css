@@ -1,10 +1,25 @@
-#meta table {
-  border-collapse: collapse;
+h5 {
+  margin-bottom: calc(1*var(--unit));
 }
 
+table {
+  border-collapse: collapse;
+  background-color: var(--white);
+  width: calc(25 * var(--unit));
+}
 
-#meta table td {
+table tr {
+  height: calc(2 * var(--unit));
+}
+table td {
   font-family: monospace;
   border: 1px solid;
   padding: 0.1rem 0.3rem;
+}
+
+table td:nth-of-type(1) {
+  width: calc(10 * var(--unit));
+}
+table td:nth-of-type(2) {
+  text-align: right;
 }

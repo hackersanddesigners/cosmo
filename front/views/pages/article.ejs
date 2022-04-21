@@ -23,13 +23,15 @@
 
   <body>
 
+    <%- include( 'utils/grid' ) -%>
     <%- include( 'header', header ) -%>
 
-    <main>
+    
+    <header>
 
       <h1> <%= title %> </h1>
       <h2> <%= author %> </h2>
-  
+
       <%- include( 'meta', { 
         createdAt,
         publishedAt,
@@ -43,9 +45,13 @@
         }) -%>
       <% } %> 
 
-      <% for ( const section of body ) { %> 
-        <%- include( 'section', { section }) -%>
-      <% } %> 
+    </header>
+
+    <main id="main-content">
+
+        <% for ( const section of body ) { %> 
+          <%- include( 'section', { section }) -%>
+        <% } %> 
 
     </main>
 

@@ -1,0 +1,35 @@
+main section.articles {
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  padding: calc(3 * var(--unit)) calc(7 * var(--unit));
+}
+
+main article.block {
+  /* min-width : 12rem;
+  max-width : 12rem; */
+  --margin: 0rem;
+  --back: var(--white);
+  background-color: var(--back);
+  min-height: calc(25 * var(--unit ));
+  margin: var(--margin);
+  /* flex-basis: min( calc(33.33% - 2 * var(--margin)), calc(20rem - 2 * var(--margin))); */
+  flex-basis: calc(20 * var(--unit ));
+  border: var(--thin);
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-shadow: var(--shadow);
+  transition: box-shadow var(--very-fast) linear;
+}
+main article.block p {
+  margin: 0;
+}
+main article.block:hover,
+main article.block:focus,
+main article.block:focus-within {
+  box-shadow: 0 0 var(--shadow-size) 0rem hsla(60, 100%, 50%, 0.457);
+  z-index: 1;
+}

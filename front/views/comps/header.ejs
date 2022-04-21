@@ -1,8 +1,16 @@
 <header>
+  <a
+    title="Skip to main content"
+    class="skip-to-main" 
+    href="#main-content"
+  >
+    Skip to main content
+  </a>
   <nav>
     <ul>
       <% for ( const { name, path } of routes ) { %> 
-        <li> 
+        <li
+        > 
           <a
             title="<%= name %>"
             href="<%= path %>"

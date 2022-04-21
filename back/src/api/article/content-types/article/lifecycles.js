@@ -1,9 +1,9 @@
 const
 
   before_update = event => {
-    // if (event.params.data.version) {
+    if (event.params.data.version !== undefined ) {
       event.params.data.version ++
-    // }  
+    }  
   },
 
   after_create_or_update = event => {

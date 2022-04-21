@@ -1,15 +1,22 @@
 <section>
   <h5>History</h5>
-  <ul>
-    <% for ( const sibling of siblings ) { %> 
-      <li>
-        <a
-          title="<%= sibling %>"
-          href="<%= `/${ slug }/${ sibling }` %>"
-        >
-          <%= sibling %>
-        </a> 
-      </li>
-    <% } %> 
-  </ul>
+  <table>
+    <tbody>
+      <% for ( const sibling of siblings ) { %> 
+        <tr>
+          <td>
+            → 
+          </td>
+          <td>
+            <a
+              title="<%= sibling %>"
+              href="<%= `/${ slug }/${ sibling }` %>"
+            >
+              <%= sibling %>
+            </a> 
+          </td>
+        </tr>
+      <% } %> 
+    </tbody>
+  </table>
 </section>
