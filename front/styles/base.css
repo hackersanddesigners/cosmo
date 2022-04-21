@@ -106,6 +106,10 @@ main section figure {
   padding-block: var(--unit);
   margin-block: var(--unit);
 }
+main section.text:focus-within,
+main section figure:focus-within {
+  outline: var(--focus);
+}
 
 main section.text {
   padding-block: 0;
