@@ -82,9 +82,21 @@ h1 {
 main section {
   max-width  : min(70%, 40rem);
 }
+main section.text,
+main section figure {
+  border: var(--thin);
+  background-color: var(--white);
+  padding-inline: var(--unit);
+  padding-block: var(--unit);
+  margin-block: var(--unit);
+}
+
+main section.text {
+  padding-block: 0;
+}
 
 main section figure {
-  /* width: 100%; */
+  margin-inline: calc( 5 * var(--unit) );
 }
 main section figure img {
   max-width: 100%;
@@ -99,6 +111,8 @@ main section figure figcaption {
   font-style: italic;
   text-align: center;
 }
+
+
 
 #grid {
   position: fixed;

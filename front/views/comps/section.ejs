@@ -1,5 +1,6 @@
 <% const { type } = section %>  
-<section>
+
+<section  class="<%= type %>">
 
   <% if ( type == 'gallery' ) { %>
     <pre><%= JSON.stringify( section, null, 2 ) %></pre>
