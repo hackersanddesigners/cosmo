@@ -18,6 +18,8 @@ const {
   port
 } = require( './config' )
 
+const path = require('path')
+
 
 
 
@@ -63,6 +65,10 @@ const init = async () => {
   app
   .use( express.json() )
   .use( express.static( 'dist' ) )
+
+  app.set('views', path.join(__dirname, 'views/pages'))
+  app.set('view engine', 'ejs')
+
   
   app.post('/', async (req, res) => {
   
